@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>App de Clima</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="buscarClima()">
+    <ion-item>
+      <ion-label position="floating">Digite o nome da cidade</ion-label>
+      <ion-input
+        type="text"
+        [(ngModel)]="cidade"
+        name="cidade"
+        required
+        clearInput>
+      </ion-input>
+    </ion-item>
+
+    <ion-button expand="standard" type="submit" class="ion-margin-top" [disabled]="!cidade">
+      Buscar Clima
+    </ion-button>
+  </form>
+
+  <div *ngIf="erro" class="ion-text-center ion-margin-top">
+    <ion-text color="danger">
+      <p>❌ {{ erro }}</p>
+    </ion-text>
+  </div>
+  <div *ngIf="clima" class="ion-margin-top ion-text-center">
+    <h2>{{ clima.name }}</h2>
+    <p>{{ clima.weather[0].description | titlecase }}</p>
+    <img [src]="'http://openweathermap.org/img/wn/' + clima.weather[0].icon + '@2x.png'" alt="Ícone do clima">
+    <h1>{{ clima.main.temp }}°C</h1>
+  </div>
+
+</ion-content>
