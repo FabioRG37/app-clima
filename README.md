@@ -1,27 +1,87 @@
-# AppClima
+# 🌤️ App de Clima - Ionic + Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Aplicativo simples que permite ao usuário buscar o clima atual de uma cidade, consumindo a API da [OpenWeatherMap](https://openweathermap.org/api).
 
-## Development server
+## 📱 Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Buscar o clima atual por nome da cidade
+- Exibir:
+  - Nome da cidade
+  - Descrição do clima
+  - Ícone representativo
+  - Temperatura em graus Celsius
+- Validação de entrada
+- Tratamento de erro (ex: cidade inválida)
 
-## Code scaffolding
+## 🔧 Tecnologias utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- [Ionic Framework 7](https://ionicframework.com/)
+- [Angular 17](https://angular.dev/)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+- TypeScript
 
-## Build
+## 🚀 Como executar o projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 1. Clone o repositório
 
-## Running unit tests
+```bash
+git clone https://github.com/SEU_USUARIO/app-clima.git
+cd app-clima
+````
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 2. Instale as dependências
 
-## Running end-to-end tests
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 3. Configure a chave da API
 
-## Further help
+Crie o arquivo:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+src/environments/.env.local.ts
+```
+
+E adicione:
+
+```ts
+export const localSecrets = {
+  weatherApiKey: 'SUA_CHAVE_AQUI'
+};
+```
+
+> ❗ Esse arquivo está no `.gitignore` por segurança.
+
+### 4. Execute a aplicação
+
+```bash
+npm start
+```
+
+Acesse no navegador: [http://localhost:4200](http://localhost:4200)
+
+## 📁 Estrutura principal
+
+```
+src/
+├── app/
+│   ├── pages/home/         → Tela principal com o formulário de busca
+│   ├── services/weather/   → Serviço responsável pela requisição HTTP
+├── environments/
+│   ├── environment.ts      → Configurações gerais (URL base)
+│   ├── .env.local.ts       → Arquivo local com chave da API (não versionado)
+```
+
+## 🛡️ Segurança
+
+* A chave da API da OpenWeatherMap **não está incluída** no repositório.
+* O projeto utiliza um arquivo local `.env.local.ts`, excluído via `.gitignore`.
+
+## 📷 Captura de tela *(opcional)*
+
+> Adicione aqui uma imagem da interface se desejar.
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT.
