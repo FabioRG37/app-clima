@@ -15,4 +15,10 @@ export class WeatherService {
     const url = `${environment.weatherApiUrl}weather?q=${city}&appid=${localSecrets.weatherApiKey}&units=metric&lang=pt_br`;
     return this.http.get(url);
   }
+
+  getForecast(city: string): Observable<any> {
+    const url = `${environment.weatherApiUrl}forecast?q=${city}&appid=${localSecrets.weatherApiKey}&units=metric&lang=pt_br`;
+    return this.http.get(url);
+  }
+
 }

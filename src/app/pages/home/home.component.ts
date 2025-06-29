@@ -10,6 +10,7 @@ export class HomeComponent {
   cidade: string = '';
   erro: string = '';
   clima: any = null;
+  previsao: any[] = [];
 
   constructor(private weatherService: WeatherService) {}
 
@@ -26,14 +27,22 @@ export class HomeComponent {
       .subscribe({
         next: (dados) => {
           this.clima = dados;
-          console.log(dados);
         },
         error: (err) => {
           console.error('Erro ao buscar clima. Verifique o nome da cidade:', err);
+          this.erro = 'Erro ao buscar clima.';
           this.clima = null;
         }
       });
 
-    // Aqui depois chamaremos o serviço de clima
+    this.weatherService.getForecast(this.cidade)
+      .subscribe({
+        next: (dados) => {
+          this.previsao = dados.list.filter((item: any) => item.dt_txt.includes('12:00:00'));
+        },
+        error: (err) => {
+          this.previsao = [];
+        }
+      });
   }
 }

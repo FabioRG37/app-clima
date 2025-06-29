@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>App de Clima</ion-title>
+    <ion-title>App Clima</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -33,5 +33,23 @@
     <img [src]="'http://openweathermap.org/img/wn/' + clima.weather[0].icon + '@2x.png'" alt="Ícone do clima">
     <h1>{{ clima.main.temp }}°C</h1>
   </div>
+  <ion-card *ngIf="previsao.length" class="ion-margin-top">
+    <ion-card-header>
+      <ion-card-title>Previsão para os próximos dias</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="scroll-container">
+        <div class="day-card" *ngFor="let dia of previsao">
+          <div class="ion-text-center">
+            <p>{{ dia.dt_txt | date:'EEEE (dd/MM)' : 'pt-BR' }}</p>
+            <img [src]="'http://openweathermap.org/img/wn/' + dia.weather[0].icon + '@2x.png'" alt="Ícone">
+            <p>{{ dia.weather[0].description | titlecase }}</p>
+            <h2>{{ dia.main.temp }}°C</h2>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
 
 </ion-content>
