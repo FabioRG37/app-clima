@@ -30,7 +30,7 @@ Projeto voltado para estudo e prática de consumo de API, uso de geolocalizaçã
 1. **Clonar o repositório:**
 
 ```bash
-git clone https://github.com/SEU_USUARIO/app-clima.git
+git clone https://github.com/FabioRG37/app-clima
 cd app-clima
 ````
 
