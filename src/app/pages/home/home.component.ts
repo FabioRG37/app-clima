@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
+import { localSecrets } from 'src/environments/.env.local';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   cidade: string = '';
   erro: string = '';
   clima: any = null;
   previsao: any[] = [];
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private http: HttpClient
+  ) {}
+
+  ngOnInit() {
+    // Verifica se o navegador suporta geolocalização
+    this.buscarLocalizacao();
+  }
+
 
   buscarClima() {
     if (!this.cidade.trim()) {
@@ -44,5 +55,37 @@ export class HomeComponent {
           this.previsao = [];
         }
       });
+  }
+
+  buscarLocalizacao() {
+    if('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          console.log("Localização detectada:", pos.coords);
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          this.buscarCidadePorCoordenadas(lat, lon);
+        },
+        (err) => {
+          console.warn("Permissão de localização negada", err);
+        }
+      );
+    } else {
+      console.warn("Geolocalização não suportada");
+    }
+  }
+
+  buscarCidadePorCoordenadas(lat: number, lon: number) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${localSecrets.weatherApiKey}&lang=pt_br&units=metric`;
+
+    this.http.get(url).subscribe({
+      next: (dados: any) => {
+        this.cidade = dados.name;
+        this.buscarClima(); // já busca o clima da cidade detectada
+      },
+      error: (err) => {
+        console.error('Erro ao obter cidade por coordenadas:', err);
+      }
+    });
   }
 }

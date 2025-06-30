@@ -42,5 +42,7 @@ testem.log
 Thumbs.db
 
 www/
+android/
+ios/
 .env
 src/environments/.env.local.ts

@@ -6,6 +6,10 @@
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="buscarClima()">
+    <ion-button fill="outline" (click)="buscarLocalizacao()">
+      Minha localização
+    </ion-button>
+
     <ion-item>
       <ion-label position="floating">Digite o nome da cidade</ion-label>
       <ion-input

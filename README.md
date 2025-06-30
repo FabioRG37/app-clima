@@ -1,49 +1,48 @@
-# 🌤️ App de Clima - Ionic + Angular
+# 🌤️ App Clima – Ionic + Angular
 
-Aplicativo simples que permite ao usuário buscar o clima atual de uma cidade, consumindo a API da [OpenWeatherMap](https://openweathermap.org/api).
+Aplicativo de clima desenvolvido com **Ionic Framework** e **Angular**, que consome dados da **OpenWeatherMap API**.  
+Projeto voltado para estudo e prática de consumo de API, uso de geolocalização e estruturação de aplicações mobile com Capacitor.
 
-## 📱 Funcionalidades
+---
 
-- Buscar o clima atual por nome da cidade
-- Exibir:
-  - Nome da cidade
-  - Descrição do clima
-  - Ícone representativo
-  - Temperatura em graus Celsius
-- Validação de entrada
-- Tratamento de erro (ex: cidade inválida)
+## ✅ Funcionalidades
 
-## 🔧 Tecnologias utilizadas
+- 🔍 Busca por cidade com exibição do clima atual (temperatura, descrição e ícone)
+- 📅 Previsão para os próximos 5 dias com cards responsivos
+- 📍 Detecção automática da cidade via geolocalização
+- 🌐 Interface limpa e responsiva com Ionic Components
+- 🔒 Proteção da chave da API com variável de ambiente local (`.env.local.ts`)
+
+---
+
+## 💻 Tecnologias utilizadas
 
 - [Ionic Framework 7](https://ionicframework.com/)
-- [Angular 17](https://angular.dev/)
-- [OpenWeatherMap API](https://openweathermap.org/api)
-- TypeScript
+- [Angular 17](https://angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [OpenWeatherMap API](https://openweathermap.org/)
+- [Capacitor](https://capacitorjs.com/) (para build nativo Android)
 
-## 🚀 Como executar o projeto
+---
 
-### 1. Clone o repositório
+## 🧪 Como rodar o projeto localmente
+
+1. **Clonar o repositório:**
 
 ```bash
 git clone https://github.com/SEU_USUARIO/app-clima.git
 cd app-clima
 ````
 
-### 2. Instale as dependências
+2. **Instalar dependências:**
 
 ```bash
 npm install
 ```
 
-### 3. Configure a chave da API
+3. **Criar arquivo com sua chave da API:**
 
-Crie o arquivo:
-
-```
-src/environments/.env.local.ts
-```
-
-E adicione:
+Crie `src/environments/env.local.ts` com o seguinte conteúdo:
 
 ```ts
 export const localSecrets = {
@@ -51,37 +50,48 @@ export const localSecrets = {
 };
 ```
 
-> ❗ Esse arquivo está no `.gitignore` por segurança.
-
-### 4. Execute a aplicação
+4. **Rodar localmente:**
 
 ```bash
-npm start
+ionic serve
 ```
 
-Acesse no navegador: [http://localhost:4200](http://localhost:4200)
+---
 
-## 📁 Estrutura principal
+## 📱 Rodar no Android (via Capacitor)
 
-```
-src/
-├── app/
-│   ├── pages/home/         → Tela principal com o formulário de busca
-│   ├── services/weather/   → Serviço responsável pela requisição HTTP
-├── environments/
-│   ├── environment.ts      → Configurações gerais (URL base)
-│   ├── .env.local.ts       → Arquivo local com chave da API (não versionado)
+1. Gerar o build:
+
+```bash
+npm run build
 ```
 
-## 🛡️ Segurança
+2. Sincronizar com Capacitor:
 
-* A chave da API da OpenWeatherMap **não está incluída** no repositório.
-* O projeto utiliza um arquivo local `.env.local.ts`, excluído via `.gitignore`.
+```bash
+npx cap sync
+```
 
-## 📷 Captura de tela *(opcional)*
+3. Abrir no Android Studio:
 
-> Adicione aqui uma imagem da interface se desejar.
+```bash
+npx cap open android
+```
+
+4. Conectar o dispositivo e rodar
+
+---
+
+## 🚧 Funcionalidades futuras
+
+* 📌 Histórico de buscas
+* 🌡️ Alternar entre °C e °F
+* 🖼️ Melhorias visuais e animações
+* ☁️ Deploy online (Firebase Hosting)
+
+---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.
+Projeto pessoal para fins de estudo.
+Disponível sob a licença MIT.
