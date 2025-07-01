@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from 'src/app/services/weather.service';
 import { localSecrets } from 'src/environments/.env.local';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,17 @@ export class HomeComponent implements OnInit {
     this.buscarLocalizacao();
   }
 
+  async buscarLocalizacao() {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      console.log('Localização detectada:', position.coords);
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      this.buscarCidadePorCoordenadas(lat, lon);
+    } catch (error) {
+      console.warn('Erro ao obter localização:', error);
+    }
+  }
 
   buscarClima() {
     if (!this.cidade.trim()) {
@@ -37,7 +49,10 @@ export class HomeComponent implements OnInit {
     this.weatherService.getCurrentWeather(this.cidade)
       .subscribe({
         next: (dados) => {
-          this.clima = dados;
+          this.clima = {
+            ...dados,
+            iconeUrl: `https://openweathermap.org/img/wn/${dados.weather[0].icon}@2x.png`
+          };
         },
         error: (err) => {
           console.error('Erro ao buscar clima. Verifique o nome da cidade:', err);
@@ -49,30 +64,31 @@ export class HomeComponent implements OnInit {
     this.weatherService.getForecast(this.cidade)
       .subscribe({
         next: (dados) => {
-          this.previsao = dados.list.filter((item: any) => item.dt_txt.includes('12:00:00'));
+          const diasUnicos: any[] = [];
+          const datasAdicionadas = new Set();
+
+          for (const item of dados.list) {
+            const data = item.dt_txt.split(' ')[0];
+
+            if (!datasAdicionadas.has(data)) {
+              datasAdicionadas.add(data);
+              diasUnicos.push({
+                data,
+                temperatura: item.main.temp,
+                descricao: item.weather[0].description,
+                iconeUrl: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+              });
+            }
+
+            if (diasUnicos.length === 7) break;
+          }
+
+          this.previsao = diasUnicos;
         },
         error: (err) => {
           this.previsao = [];
         }
       });
-  }
-
-  buscarLocalizacao() {
-    if('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          console.log("Localização detectada:", pos.coords);
-          const lat = pos.coords.latitude;
-          const lon = pos.coords.longitude;
-          this.buscarCidadePorCoordenadas(lat, lon);
-        },
-        (err) => {
-          console.warn("Permissão de localização negada", err);
-        }
-      );
-    } else {
-      console.warn("Geolocalização não suportada");
-    }
   }
 
   buscarCidadePorCoordenadas(lat: number, lon: number) {
