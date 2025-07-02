@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   erro: string = '';
   clima: any = null;
   previsao: any[] = [];
+  temaEscuroAtivo = false;
 
   constructor(
     private weatherService: WeatherService,
@@ -23,7 +24,19 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     // Verifica se o navegador suporta geolocalização
     this.buscarLocalizacao();
+
+    // Verifica o tema salvo no localStorage e aplica o tema escuro se necessário
+    const temaSalvo = localStorage.getItem('tema');
+    this.temaEscuroAtivo = temaSalvo === 'escuro';
+    localStorage.setItem('tema', this.temaEscuroAtivo ? 'escuro' : 'claro');
   }
+
+  alternarTema() {
+    this.temaEscuroAtivo = !this.temaEscuroAtivo;
+    document.documentElement.classList.toggle('dark', this.temaEscuroAtivo);
+    localStorage.setItem('tema', this.temaEscuroAtivo ? 'escuro' : 'claro');
+  }
+
 
   async buscarLocalizacao() {
     try {
@@ -68,7 +81,7 @@ export class HomeComponent implements OnInit {
           const datasAdicionadas = new Set();
 
           for (const item of dados.list) {
-            const data = item.dt_txt.split(' ')[0];
+            const data = this.formatarData(item.dt_txt.split(' ')[0]);
 
             if (!datasAdicionadas.has(data)) {
               datasAdicionadas.add(data);
@@ -91,6 +104,12 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  formatarData(dataISO: string): string {
+    const [ano, mes, dia] = dataISO.split('-');
+    return `${dia}-${mes}-${ano}`;
+  }
+
+
   buscarCidadePorCoordenadas(lat: number, lon: number) {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${localSecrets.weatherApiKey}&lang=pt_br&units=metric`;
 
@@ -104,4 +123,16 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  getClasseClima(condicao: string): string {
+    const cond = condicao.toLowerCase();
+
+    if (cond.includes('chuva')) return 'clima-chuvoso';
+    if (cond.includes('nuvem') || cond.includes('nublado')) return 'clima-nublado';
+    if (cond.includes('sol') || cond.includes('claro') || cond.includes('limpo')) return 'clima-ensolarado';
+    if (cond.includes('neve')) return 'clima-neve';
+
+    return 'clima-padrao';
+  }
+
 }

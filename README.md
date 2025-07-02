@@ -1,93 +1,89 @@
-# 🌤️ App Clima - Previsão do Tempo com Ionic + Angular
+# 🌤️ App Clima - Ionic + Angular
 
-Este é um aplicativo desenvolvido com **Ionic + Angular**, que consome dados da API da **OpenWeatherMap** para exibir o clima atual e a previsão para os próximos dias.
+Aplicativo desenvolvido com **Ionic + Angular**, consumindo a API da [OpenWeatherMap](https://openweathermap.org/) para exibir:
 
----
-
-## 🔧 Funcionalidades
-
-- 📍 Detecta automaticamente a localização do usuário (com Capacitor Geolocation).
-- 🔎 Permite buscar o clima de qualquer cidade manualmente.
-- 🌡️ Exibe informações do clima atual, incluindo temperatura, descrição e ícone.
-- 📆 Mostra a **previsão dos próximos 7 dias**, com temperatura, descrição e ícones.
-- 📱 Layout responsivo e adaptado para dispositivos móveis.
+- Clima atual com ícone, temperatura e descrição
+- Previsão do tempo para os próximos **7 dias**
+- Suporte à **geolocalização** (com fallback manual)
+- **Tema escuro e claro** com botão no cabeçalho
+- Layout responsivo e otimizado para dispositivos móveis
 
 ---
 
-## 🚀 Como executar
+## 📱 Funcionalidades
 
-1. Clone o repositório:
+- 🔍 Busca de clima por cidade
+- 📍 Sugestão de cidade com base na localização do usuário
+- 🗓️ Cards de previsão com data formatada `dd-mm-aaaa`
+- 🌓 Botão para alternar entre modo claro e escuro
+- 📐 Layout refinado e responsivo
+- 🧠 Armazenamento da preferência de tema no navegador
+
+---
+
+## 🚀 Tecnologias
+
+- [Ionic Framework](https://ionicframework.com/)
+- [Angular](https://angular.io/)
+- [Capacitor](https://capacitorjs.com/)
+- [OpenWeatherMap API](https://openweathermap.org/api)
+
+---
+
+## 🛠️ Instalação
 
 ```bash
+# Clone o repositório
 git clone https://github.com/FabioRG37/app-clima.git
 cd app-clima
+
+# Instale as dependências
+npm install
+
+# Substitua a chave da API no arquivo src/environments/environment.ts
+
+# Execute o app em modo de desenvolvimento
+ionic serve
 ````
 
-2. Instale as dependências:
+---
 
-```bash
-npm install
-```
+## ⚙️ Configuração da API
 
-3. Configure sua chave da API no arquivo `environment.ts`:
+Crie um arquivo `src/environments/environment.ts` com:
 
 ```ts
 export const environment = {
-  production: false,
   weatherApiKey: 'SUA_CHAVE_AQUI',
   weatherApiUrl: 'https://api.openweathermap.org/data/2.5'
 };
 ```
 
-4. Execute o projeto no navegador:
-
-```bash
-ionic serve
-```
+> **Atenção:** nunca compartilhe sua chave da API em repositórios públicos.
 
 ---
 
-## 📱 Rodar no celular
+## 📲 Teste no dispositivo
 
-1. Compile os assets:
+Para testar no Android:
 
 ```bash
-npm run build
+ionic build
 npx cap sync
-```
-
-2. Adicione a plataforma Android:
-
-```bash
-npx cap add android
-```
-
-3. Abra no Android Studio:
-
-```bash
 npx cap open android
 ```
 
 ---
 
-## 🔐 Segurança
+## 🧪 Melhorias futuras
 
-* A chave da API **NÃO está exposta no repositório**.
-* Use o arquivo `environment.ts` localmente e adicione `src/environments` no `.gitignore`.
-
----
-
-## 🛠️ Tecnologias usadas
-
-* [Ionic Framework](https://ionicframework.com/)
-* [Angular](https://angular.io/)
-* [Capacitor](https://capacitorjs.com/)
-* [OpenWeatherMap API](https://openweathermap.org/api)
+* Histórico de buscas
+* Previsão por hora
+* Escolha de °C ou °F
+* Traduções multilíngue
 
 ---
 
-## 👨‍💻 Autor
+## 🧑‍💻 Autor
 
-Desenvolvido por **Fábio Gonçalves** como parte de seu processo de aprendizado com projetos práticos.
-
----
+Desenvolvido por **Fábio Gonçalves** como parte de seus estudos em Ionic + Angular com foco em APIs públicas.

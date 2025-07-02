@@ -4,3 +4,22 @@
 
 /* To quickly generate your own theme, check out the color generator */
 /* https://ionicframework.com/docs/theming/color-generator */
+
+/* Tema escuro baseado no sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ion-background-color: #121212;
+    --ion-text-color: #f0f0f0;
+    --ion-card-background: #1e1e1e;
+    --ion-card-title-color: #ffffff;
+  }
+}
+
+.dark {
+  --ion-background-color: #121212;
+  --ion-text-color: #f0f0f0;
+  --ion-card-background: #1e1e1e;
+}
+
+
+

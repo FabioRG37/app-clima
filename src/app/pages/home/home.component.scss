@@ -6,6 +6,13 @@
   scroll-snap-type: x mandatory;
 }
 
+ion-toolbar {
+  ion-icon {
+    font-size: 1.4rem;
+  }
+}
+
+
 .day-card {
   flex: 0 0 auto;
   width: 140px;
@@ -17,17 +24,55 @@
 }
 
 .icone-clima {
-  background-color: #CCC;
+  border: #CCC solid 1px;
   border-radius: 15px;
-  width: 180px;
-  height: 180px;
-  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  margin: 8px auto;
+  display: block;
 }
 
-.icone-clima-card {
-  background-color: #CCC;
-  border-radius: 15px;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
+ion-card-title,
+ion-card-subtitle {
+  color: var(--ion-text-color, #000);
+}
+
+ion-card-header {
+  color: var(--ion-text-color);
+  text-align: center;
+}
+
+.clima-atual h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.card-previsao {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.clima-chuvoso {
+  --ion-card-background: #a8c0ff;
+  --ion-text-color: #1b1b1b;
+}
+
+.clima-nublado {
+  --ion-card-background: #dcdcdc;
+  --ion-text-color: #000;
+}
+
+.clima-ensolarado {
+  --ion-card-background: #ffe082;
+  --ion-text-color: #222;
+}
+
+.clima-neve {
+  --ion-card-background: #e0f7fa;
+  --ion-text-color: #004d40;
+}
+
+.clima-padrao {
+  --ion-card-background: #ffffff;
+  --ion-text-color: #000;
 }
