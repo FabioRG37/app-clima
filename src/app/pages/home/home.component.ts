@@ -25,10 +25,17 @@ export class HomeComponent implements OnInit {
     // Verifica se o navegador suporta geolocalização
     this.buscarLocalizacao();
 
-    // Verifica o tema salvo no localStorage e aplica o tema escuro se necessário
     const temaSalvo = localStorage.getItem('tema');
-    this.temaEscuroAtivo = temaSalvo === 'escuro';
-    localStorage.setItem('tema', this.temaEscuroAtivo ? 'escuro' : 'claro');
+    if (!temaSalvo) {
+      const prefereEscuro = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      this.temaEscuroAtivo = prefereEscuro;
+      localStorage.setItem('tema', prefereEscuro ? 'escuro' : 'claro');
+    } else {
+      this.temaEscuroAtivo = temaSalvo === 'escuro';
+    }
+
+    document.documentElement.classList.toggle('dark', this.temaEscuroAtivo);
+    // Adiciona o listener para mudanças de tema do sistema
   }
 
   alternarTema() {

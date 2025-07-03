@@ -1,3 +1,7 @@
+ion-header {
+  padding-top: calc(env(safe-area-inset-top) + 8px);
+}
+
 .scroll-container {
   display: flex;
   overflow-x: auto;
@@ -11,7 +15,6 @@ ion-toolbar {
     font-size: 1.4rem;
   }
 }
-
 
 .day-card {
   flex: 0 0 auto;
@@ -45,6 +48,14 @@ ion-card-header {
 .clima-atual h2 {
   margin: 0;
   font-size: 2rem;
+}
+
+.titulo-previsao {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  color: var(--ion-color-medium);
 }
 
 .card-previsao {
