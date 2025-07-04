@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
         }
       });
 
+      /*
     this.weatherService.getForecast(this.cidade)
       .subscribe({
         next: (dados) => {
@@ -108,7 +109,23 @@ export class HomeComponent implements OnInit {
         error: (err) => {
           this.previsao = [];
         }
+      }); 
+      */
+
+      this.weatherService.getPrevisaoFiltrada(this.cidade).subscribe({
+        next: (dados) => {
+          this.previsao = dados.map((item: any) => ({
+            data: this.formatarData(item.dt_txt.split(' ')[0]),
+            temperatura: item.main.temp,
+            descricao: item.weather[0].description,
+            iconeUrl: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+          }));
+        },
+        error: (err) => {
+          console.error('Erro ao buscar previsão:', err);
+        }
       });
+
   }
 
   formatarData(dataISO: string): string {

@@ -1,89 +1,76 @@
-# 🌤️ App Clima - Ionic + Angular
+# App Clima ☀️🌧️
 
-Aplicativo desenvolvido com **Ionic + Angular**, consumindo a API da [OpenWeatherMap](https://openweathermap.org/) para exibir:
-
-- Clima atual com ícone, temperatura e descrição
-- Previsão do tempo para os próximos **7 dias**
-- Suporte à **geolocalização** (com fallback manual)
-- **Tema escuro e claro** com botão no cabeçalho
-- Layout responsivo e otimizado para dispositivos móveis
+Aplicativo desenvolvido com **Ionic + Angular**, que consome a API da **OpenWeatherMap** para exibir a previsão do tempo atual e dos próximos 7 dias.
 
 ---
 
-## 📱 Funcionalidades
+## 🔧 Funcionalidades
 
-- 🔍 Busca de clima por cidade
-- 📍 Sugestão de cidade com base na localização do usuário
-- 🗓️ Cards de previsão com data formatada `dd-mm-aaaa`
-- 🌓 Botão para alternar entre modo claro e escuro
-- 📐 Layout refinado e responsivo
-- 🧠 Armazenamento da preferência de tema no navegador
+- ✅ Busca de clima atual por nome da cidade ou geolocalização
+- ✅ Exibição do clima atual (ícone, temperatura, descrição)
+- ✅ Previsão para os **próximos 7 dias** (excluindo o dia atual)
+- ✅ Alternância entre modo claro/escuro com botão no topo
+- ✅ Layout responsivo, adaptado para dispositivos móveis
+- ✅ Frase "Previsão para os próximos 7 dias" exibida dinamicamente
+- ✅ Correção de espaçamento no último card de previsão
+- ✅ Proteção da chave da API com arquivo `.env.local`
 
 ---
 
-## 🚀 Tecnologias
+## 💡 Tecnologias
 
 - [Ionic Framework](https://ionicframework.com/)
 - [Angular](https://angular.io/)
-- [Capacitor](https://capacitorjs.com/)
 - [OpenWeatherMap API](https://openweathermap.org/api)
 
 ---
 
-## 🛠️ Instalação
+## 📦 Instalação
 
 ```bash
 # Clone o repositório
 git clone https://github.com/FabioRG37/app-clima.git
+
+# Acesse a pasta
 cd app-clima
 
 # Instale as dependências
 npm install
 
-# Substitua a chave da API no arquivo src/environments/environment.ts
+# Crie o arquivo com suas chaves
+cp src/environments/.env.local.example src/environments/.env.local
 
-# Execute o app em modo de desenvolvimento
+# Compile o projeto
+npm run build
+
+# Execute em ambiente local
 ionic serve
 ````
 
 ---
 
-## ⚙️ Configuração da API
-
-Crie um arquivo `src/environments/environment.ts` com:
-
-```ts
-export const environment = {
-  weatherApiKey: 'SUA_CHAVE_AQUI',
-  weatherApiUrl: 'https://api.openweathermap.org/data/2.5'
-};
-```
-
-> **Atenção:** nunca compartilhe sua chave da API em repositórios públicos.
-
----
-
-## 📲 Teste no dispositivo
-
-Para testar no Android:
+## 📱 Executar no dispositivo físico
 
 ```bash
-ionic build
-npx cap sync
-npx cap open android
+ionic cap add android
+ionic cap sync
+ionic cap open android
 ```
 
----
-
-## 🧪 Melhorias futuras
-
-* Histórico de buscas
-* Previsão por hora
-* Escolha de °C ou °F
-* Traduções multilíngue
+> Certifique-se de que o projeto tenha sido compilado (`npm run build`) antes de abrir no Android Studio.
 
 ---
 
-## 🧑‍💻 Autor
+## 🔐 Observações
 
-Desenvolvido por **Fábio Gonçalves** como parte de seus estudos em Ionic + Angular com foco em APIs públicas.
+* A chave da API **NÃO** é incluída no repositório público. Para usar, crie seu próprio `.env.local`.
+* O modo escuro pode ser controlado manualmente **apenas quando o tema do dispositivo estiver desativado**.
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por [Fábio Gonçalves](https://github.com/FabioRG37)
+
+````
+
