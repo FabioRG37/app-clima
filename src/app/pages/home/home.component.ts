@@ -81,37 +81,6 @@ export class HomeComponent implements OnInit {
         }
       });
 
-      /*
-    this.weatherService.getForecast(this.cidade)
-      .subscribe({
-        next: (dados) => {
-          const diasUnicos: any[] = [];
-          const datasAdicionadas = new Set();
-
-          for (const item of dados.list) {
-            const data = this.formatarData(item.dt_txt.split(' ')[0]);
-
-            if (!datasAdicionadas.has(data)) {
-              datasAdicionadas.add(data);
-              diasUnicos.push({
-                data,
-                temperatura: item.main.temp,
-                descricao: item.weather[0].description,
-                iconeUrl: `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
-              });
-            }
-
-            if (diasUnicos.length === 7) break;
-          }
-
-          this.previsao = diasUnicos;
-        },
-        error: (err) => {
-          this.previsao = [];
-        }
-      }); 
-      */
-
       this.weatherService.getPrevisaoFiltrada(this.cidade).subscribe({
         next: (dados) => {
           this.previsao = dados.map((item: any) => ({

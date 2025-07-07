@@ -55,7 +55,7 @@
   <ion-grid class="lista-previsao">
     <ion-row>
       <h3 *ngIf="previsao && previsao.length > 0" class="titulo-previsao">
-        Previsão para os próximos 7 dias
+        Previsão para os próximos dias
       </h3>
       <ion-col size="12" *ngFor="let dia of previsao">
         <ion-card [ngClass]="getClasseClima(dia.descricao)" class="card-previsao">
