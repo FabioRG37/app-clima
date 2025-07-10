@@ -1,76 +1,78 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Previsão do Tempo</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="alternarTema()" fill="clear">
-        <ion-icon [name]="temaEscuroAtivo ? 'sunny-outline' : 'moon-outline'"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="ion-padding">
 
-  <form (ngSubmit)="buscarClima()">
-    <ion-button fill="outline" (click)="buscarLocalizacao()">
-      Minha localização
-    </ion-button>
-
-    <ion-item>
-      <ion-label position="floating">Digite o nome da cidade</ion-label>
-      <ion-input
-        type="text"
-        [(ngModel)]="cidade"
-        name="cidade"
-        required
-        clearInput>
-      </ion-input>
-    </ion-item>
-
-    <ion-button expand="standard" type="submit" class="ion-margin-top" [disabled]="!cidade">
-      Buscar Clima
-    </ion-button>
-  </form>
-
-  <div *ngIf="erro" class="ion-text-center ion-margin-top">
-    <ion-text color="danger">
-      <p>❌ {{ erro }}</p>
-    </ion-text>
-  </div>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Previsão do Tempo</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="alternarTema()" fill="clear">
+            <ion-icon [name]="temaEscuroAtivo ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    <form (ngSubmit)="buscarClima()">
+      <ion-button fill="outline" (click)="buscarLocalizacao()">
+        Minha localização
+      </ion-button>
   
-  <!-- CLIMA ATUAL -->
-  <ion-card [ngClass]="getClasseClima(clima.weather[0].main)" class="clima-atual" *ngIf="clima">
-    <ion-card-header class="ion-text-center">
-      <ion-card-title>{{ cidade }}</ion-card-title>
-      <p>Hoje</p>
-      <ion-card-subtitle>{{ clima.weather[0].description }}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content class="ion-text-center">
-      <img [src]="clima.iconeUrl" class="icone-clima" alt="ícone do clima" />
-      <h2>{{ clima.main.temp }}°C</h2>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- PREVISÃO -->
-  <ion-grid class="lista-previsao">
-    <ion-row>
-      <h3 *ngIf="previsao && previsao.length > 0" class="titulo-previsao">
-        Previsão para os próximos dias
-      </h3>
-      <ion-col size="12" *ngFor="let dia of previsao">
-        <ion-card [ngClass]="getClasseClima(dia.descricao)" class="card-previsao">
-          <ion-card-header>
-            <ion-card-title>{{ dia.data }}</ion-card-title>
-            <ion-card-subtitle>{{ dia.descricao }}</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content class="ion-text-center">
-            <img [src]="dia.iconeUrl" class="icone-clima" />
-            <p><strong>{{ dia.temperatura }}°C</strong></p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+      <ion-item>
+        <ion-label position="floating">Digite o nome da cidade</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="cidade"
+          name="cidade"
+          required
+          clearInput>
+        </ion-input>
+      </ion-item>
+  
+      <ion-button expand="standard" type="submit" class="ion-margin-top" [disabled]="!cidade">
+        Buscar Clima
+      </ion-button>
+    </form>
+    
+  <div class="web-wrapper">
+  
+    <div *ngIf="erro" class="ion-text-center ion-margin-top">
+      <ion-text color="danger">
+        <p>❌ {{ erro }}</p>
+      </ion-text>
+    </div>
+    
+    <!-- CLIMA ATUAL -->
+    <ion-card [ngClass]="getClasseClima(clima.weather[0].main)" class="clima-atual" *ngIf="clima">
+      <ion-card-header class="ion-text-center">
+        <ion-card-title>{{ cidade }}</ion-card-title>
+        <p>Hoje - Clima atual</p>
+        <ion-card-subtitle>{{ clima.weather[0].description }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="ion-text-center">
+        <img [src]="clima.iconeUrl" class="icone-clima" alt="ícone do clima" />
+        <h2>{{ clima.main.temp }}°C</h2>
+      </ion-card-content>
+    </ion-card>
+  
+    <!-- PREVISÃO -->
+    <ion-grid class="lista-previsao">
+      <ion-row>
+        <h3 *ngIf="previsao && previsao.length > 0" class="titulo-previsao">
+          Previsão para os próximos dias
+        </h3>
+        <ion-col size="12" *ngFor="let dia of previsao">
+          <ion-card [ngClass]="getClasseClima(dia.descricao)" class="card-previsao">
+            <ion-card-header>
+              <ion-card-title>{{ dia.data }}</ion-card-title>
+              <ion-card-subtitle>{{ dia.descricao }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="ion-text-center">
+              <img [src]="dia.iconeUrl" class="icone-clima" />
+              <p>Máxima: <strong>{{ dia.temperatura }}°C</strong></p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </ion-content>

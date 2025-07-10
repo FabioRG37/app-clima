@@ -1,3 +1,17 @@
+.web-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 0 80px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    padding: 0 160px;
+  }
+}
+
 ion-header {
   padding-top: calc(env(safe-area-inset-top) + 14px);
 }

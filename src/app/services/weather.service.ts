@@ -33,7 +33,7 @@ export class WeatherService {
         const previsoes = response.list.filter((item: any) => {
           const data = item.dt_txt.split(' ')[0];
           const hora = item.dt_txt.split(' ')[1];
-          return data !== dataHoje && hora === '12:00:00';
+          return data !== dataHoje && hora === '15:00:00';
         });
 
         return previsoes.slice(0, 7); // limitar a 7 dias
